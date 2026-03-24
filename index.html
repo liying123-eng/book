@@ -248,7 +248,7 @@
             <div class="touch-hint">按住 3 秒</div>
         </div>
 
-        <div class="hint">💫 肯定40% · 否定30% · 哲理30%</div>
+        <div class="hint">💫 肯定50% · 模棱两可30% · 负面20%</div>
     </div>
 
     <div class="answer-display" id="answerDisplay">
@@ -261,9 +261,9 @@
     </div>
 
     <script>
-        // 平衡版答案库：肯定40% + 否定30% + 哲理30%
+        // 答案库：肯定50% + 模棱两可30% + 负面20%
         const answers = [
-            // ===== 肯定/积极 40% =====
+            // ===== 肯定/积极 50%（20个）=====
             { text: '是的', icon: '☀️', meaning: '时机已经成熟，勇敢去做吧。宇宙在支持你。', type: 'positive' },
             { text: '大胆去做', icon: '🚀', meaning: '冒险是成长的必经之路。勇敢迈出那一步。', type: 'positive' },
             { text: '机会难得', icon: '💎', meaning: '机不可失，时不再来。抓住眼前的机会。', type: 'positive' },
@@ -279,21 +279,13 @@
             { text: '展示自己', icon: '🦚', meaning: '是金子就要发光，让世界看到你的才华。', type: 'positive' },
             { text: '坚持己见', icon: '🗿', meaning: '你的判断是正确的，不要被他人左右。', type: 'positive' },
             { text: '重新开始', icon: '🌅', meaning: '结束也是开始，放下过去，迎接新生。', type: 'positive' },
+            { text: '就是现在', icon: '⚡', meaning: '最好的时机就是当下，不要等待完美时刻。', type: 'positive' },
+            { text: '放手一搏', icon: '🎲', meaning: '人生能有几回搏，不试试怎么知道不行。', type: 'positive' },
+            { text: '勇往直前', icon: '🦁', meaning: '勇气不是没有恐惧，而是带着恐惧依然前行。', type: 'positive' },
+            { text: '梦想成真', icon: '✨', meaning: '你的愿望正在显化，保持信念。', type: 'positive' },
+            { text: '趁热打铁', icon: '🔨', meaning: ' momentum 正好，一鼓作气完成它。', type: 'positive' },
             
-            // ===== 否定/谨慎 30% =====
-            { text: '还不是时候', icon: '⏰', meaning: '准备还不够充分，再给自己一些时间。', type: 'negative' },
-            { text: '再等等', icon: '🌙', meaning: '耐心是一种智慧。现在不是最好的时机，静候佳音。', type: 'negative' },
-            { text: '需要谨慎', icon: '⚠️', meaning: '小心驶得万年船，多观察，少行动。', type: 'negative' },
-            { text: '暂时放下', icon: '🍃', meaning: '有些东西需要放下，才能迎接更好的。顺其自然。', type: 'negative' },
-            { text: '保持现状', icon: '🛡️', meaning: '现在很好，不需要改变。稳定也是一种幸福。', type: 'negative' },
-            { text: '及时止损', icon: '✂️', meaning: '沉没成本不是成本，及时退出是明智的。', type: 'negative' },
-            { text: '休息一下', icon: '☕', meaning: '累了就停下来，充电后才能更好地出发。', type: 'negative' },
-            { text: '改变方向', icon: '🧭', meaning: '此路不通，换个角度思考，会有新的发现。', type: 'negative' },
-            { text: '保持低调', icon: '🐢', meaning: '木秀于林风必摧之，低调行事更稳妥。', type: 'negative' },
-            { text: '不要强求', icon: '🕊️', meaning: '属于你的终会到来，不属于你的强求不得。', type: 'negative' },
-            { text: '需要妥协', icon: '🤝', meaning: '退一步海阔天空，适当的让步是智慧。', type: 'negative' },
-            
-            // ===== 模棱两可哲理 30% =====
+            // ===== 模棱两可/哲理 30%（12个）=====
             { text: '一切都是最好的安排', icon: '☯️', meaning: '当下的困惑，或许是未来的礼物。看似的失去，可能是另一种得到。', type: 'philosophy' },
             { text: '塞翁失马，焉知非福', icon: '🐴', meaning: '眼前的得失不必太过执着，福祸相依，转机往往藏在意外之中。', type: 'philosophy' },
             { text: '顺其自然', icon: '🌊', meaning: '强求不得，随遇而安。最好的安排正在发生。', type: 'philosophy' },
@@ -306,7 +298,16 @@
             { text: '韬光养晦', icon: '💎', meaning: '光芒太盛易折，才华太露易妒。藏锋守拙，等待时机。', type: 'philosophy' },
             { text: '知行合一', icon: '🎯', meaning: '知道和做到之间，隔着千山万水。想都是问题，做才有答案。', type: 'philosophy' },
             { text: '上善若水', icon: '💧', meaning: '水善利万物而不争。柔软胜刚强，包容得人心。', type: 'philosophy' },
-            { text: '既往不恋', icon: '🕊️', meaning: '未来不迎，当时不杂。不念过去，不惧将来，活在当下。', type: 'philosophy' }
+            
+            // ===== 负面/谨慎 20%（8个）=====
+            { text: '还不是时候', icon: '⏰', meaning: '准备还不够充分，再给自己一些时间。', type: 'negative' },
+            { text: '再等等', icon: '🌙', meaning: '耐心是一种智慧。现在不是最好的时机，静候佳音。', type: 'negative' },
+            { text: '需要谨慎', icon: '⚠️', meaning: '小心驶得万年船，多观察，少行动。', type: 'negative' },
+            { text: '暂时放下', icon: '🍃', meaning: '有些东西需要放下，才能迎接更好的。顺其自然。', type: 'negative' },
+            { text: '保持现状', icon: '🛡️', meaning: '现在很好，不需要改变。稳定也是一种幸福。', type: 'negative' },
+            { text: '及时止损', icon: '✂️', meaning: '沉没成本不是成本，及时退出是明智的。', type: 'negative' },
+            { text: '改变方向', icon: '🧭', meaning: '此路不通，换个角度思考，会有新的发现。', type: 'negative' },
+            { text: '不要强求', icon: '🕊️', meaning: '属于你的终会到来，不属于你的强求不得。', type: 'negative' }
         ];
 
         // 生成星空
